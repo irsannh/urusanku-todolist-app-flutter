@@ -31,6 +31,7 @@ class _SignInPageState extends State<SignInPage> {
         DatabaseReference ref = FirebaseDatabase.instance.ref("UsersData/$uid");
         await ref.update({
           "fcmToken": fcmToken,
+          "isLoggedIn": true,
         });
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Sukses Login', style: GoogleFonts.plusJakartaSans(
@@ -39,7 +40,9 @@ class _SignInPageState extends State<SignInPage> {
                 )
             ),), backgroundColor: Colors.green,)
         );
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => HomePage()), (
+            Route<dynamic> route) => false);
       } on FirebaseAuthException catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Terjadi Kesalahan: ${e.message}', style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(

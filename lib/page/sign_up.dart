@@ -36,8 +36,10 @@ class _SignUpPageState extends State<SignUpPage> {
         await ref.set({
           "name": name,
           "fcmToken": fcmToken,
+          "isLoggedIn": true,
           "tasks": {}
         });
+        await FirebaseMessaging.instance.setAutoInitEnabled(true);
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Berhasil Membuat Akun', style: GoogleFonts.plusJakartaSans(
             textStyle: TextStyle(
@@ -45,7 +47,9 @@ class _SignUpPageState extends State<SignUpPage> {
             )
           ),), backgroundColor: Colors.green,)
         );
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SuccessRegister()));
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => SuccessRegister()), (
+            Route<dynamic> route) => false);
       } on FirebaseAuthException catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Terjadi Kesalahan: ${e.message}', style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(

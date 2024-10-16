@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:urusanku_app/config/app_color.dart';
@@ -56,6 +57,13 @@ class _HomePageState extends State<HomePage> {
 
   void logout(BuildContext context) async {
     try {
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      DatabaseReference ref = FirebaseDatabase.instance.ref("UsersData/$uid");
+      await ref.update({
+        "fcmToken": "0",
+        "isLoggedIn": false,
+      });
+      await FirebaseMessaging.instance.deleteToken();
       await FirebaseAuth.instance.signOut();
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => WelcomePage()), (
