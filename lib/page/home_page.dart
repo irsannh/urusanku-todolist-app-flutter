@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:urusanku_app/config/app_color.dart';
+import 'package:urusanku_app/controller/notification_service.dart';
 import 'package:urusanku_app/page/add_task.dart';
 import 'package:urusanku_app/page/detail_task.dart';
 import 'package:urusanku_app/page/notification.dart';
@@ -52,6 +53,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    NotificationService.refreshToken();
     getNameAndTasks();
   }
 
