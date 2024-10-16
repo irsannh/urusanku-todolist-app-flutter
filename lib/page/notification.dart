@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:urusanku_app/page/home_page.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({super.key});
@@ -16,7 +17,7 @@ class _NotificationPageState extends State<NotificationPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(onPressed: (){
-          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
         }, icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 24,)),
         title: Text('Notifikasi', style: GoogleFonts.plusJakartaSans(textStyle: TextStyle(
             color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600
