@@ -9,6 +9,7 @@ import 'package:urusanku_app/page/add_task.dart';
 import 'package:urusanku_app/page/detail_task.dart';
 import 'package:urusanku_app/page/notification.dart';
 import 'package:urusanku_app/page/welcome_page.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
